@@ -60,5 +60,4 @@ public class hiveRedis {
 		this.redis.flushAll();
 		pool.destroy();
 	}
-	
 }
