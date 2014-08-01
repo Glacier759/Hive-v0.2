@@ -5,6 +5,7 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 public class hiveRedis {
+	
 	private Jedis redis;
 	private JedisPool pool;
 	private String user;
@@ -56,7 +57,7 @@ public class hiveRedis {
 		pool.returnResource(redis);
 	}
 	
-	protected void finalize() {
+	public void destory() {
 		this.redis.flushAll();
 		pool.destroy();
 	}
