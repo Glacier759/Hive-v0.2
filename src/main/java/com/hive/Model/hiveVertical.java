@@ -1,9 +1,9 @@
 package main.java.com.hive.Model;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
+
+import main.java.com.hive.BloomFilter.hiveBlomFilter;
+import main.java.com.hive.Redis.hiveRedis;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -20,7 +20,6 @@ public class hiveVertical {
 	 * @throws IOException 
 	 */
 	public Document getText( String url ) throws IOException {
-		
 		Document doc = Jsoup.connect(url).timeout(5000).get();
 		return doc;
 	}
@@ -32,25 +31,13 @@ public class hiveVertical {
 	 * @param doc
 	 * @return
 	 */
-	public void getAllURL( Document doc, String host ) {
-		Elements links = doc.select("a");
-		for( Element link : links ) {
-			String url = link.attr("href").toString();
-			if( url.startsWith("http") ) {
-				if( url.contains(host) ) {
-					//url可用，存入redis
-					//存入操作
-					System.out.println(url);
-				}
-				else {
-					continue;
-				}
-			}
-			else if( url.startsWith("/") ) {
-				//相对url转换为绝对url，并存入redis
-				String complete_url = "http://" + host + url;
-				//存入操作
-				System.out.println(complete_url);
+	public void getAllURL( Document doc, String host, hiveRedis redis, hiveBlomFilter filter ) {
+		Elements links = doc.select("a[href]");
+		for ( Element link : links ) {
+			String url = link.attr("abs:href");
+			if( url.contains(host) && !filter.exist(url) ) {
+				redis.putURL(url);
+				System.out.println(url);
 			}
 			else {
 				continue;
@@ -75,10 +62,24 @@ public class hiveVertical {
 	}
 	
 	public static void main( String[] args ) throws IOException {
-		String url = "http://dianying.fm/movie/the-croods/";
+		String url = "http://politics.people.com.cn/n/2014/0801/c1024-25380603.html";
+		hiveRedis redis = new hiveRedis("Junco");
 		hiveVertical hv = new hiveVertical();
-		Document doc = hv.getText(url);
-		hv.saveText2File(doc);
-		hv.getAllURL(doc, hv.getHost(url));
+		hiveBlomFilter filter = new hiveBlomFilter();
+		redis.connectRedis();
+		redis.putURL(url);
+		while( redis.getLength() != 0 ) {
+			Document doc = hv.getText(url);
+			hv.saveText2File(doc);
+			hv.getAllURL(doc, hv.getHost(url), redis, filter);
+			redis.remove(url);
+			url = redis.getURL();
+			if( url == null ) {
+				System.out.println("Done");
+				break;
+			}
+		}
+		redis.destory();
+		System.gc();
 	}
 }
