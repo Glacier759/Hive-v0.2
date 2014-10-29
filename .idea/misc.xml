@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="IdProvider" IDEtalkID="084EC5F3F0BF0E69803A77CBAE9F51A7" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">
@@ -10,6 +11,11 @@
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
+=======
+  <component name="IdProvider" IDEtalkID="8DE75878E3868FD844A7A4B039C13DEC" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/classes" />
+>>>>>>> 035c05a31f1441eed25f0041837595e7364d2a8a
   </component>
   <component name="masterDetails">
     <states>

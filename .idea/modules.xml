@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/Hive-v0.2.iml" filepath="$PROJECT_DIR$/Hive-v0.2.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/hive-version2.iml" filepath="$PROJECT_DIR$/hive-version2.iml" />
+>>>>>>> 035c05a31f1441eed25f0041837595e7364d2a8a
     </modules>
   </component>
 </project>

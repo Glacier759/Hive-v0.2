@@ -17,6 +17,7 @@
       <profile default="true" name="Default" enabled="false">
         <processorPath useClasspath="true" />
       </profile>
+<<<<<<< HEAD
       <profile default="false" name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -24,6 +25,8 @@
         <processorPath useClasspath="true" />
         <module name="Hive-v0.2" />
       </profile>
+=======
+>>>>>>> 035c05a31f1441eed25f0041837595e7364d2a8a
     </annotationProcessing>
   </component>
 </project>
